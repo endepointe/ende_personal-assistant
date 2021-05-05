@@ -15,6 +15,7 @@ const Login = (props) => {
 
   useUser({ redirectTo: '/', redirectIfFound: true });
 
+  // toggles the verify password and login/register button
   const toggleRegister = (e) => {
     e.preventDefault();
     setRegister(!register);
@@ -150,16 +151,18 @@ const Login = (props) => {
             </button>
           }
 
-
         </div>
       </div>
     </Layout>
   );
 }
 
-function getUser(authorization) {
-  const res = fetch('http://localhost:3001/user', {
-    headers: { authorization }
+// cors enabled allows 0.0.0.0:3000 to get data
+// from api at 0.0.0.0:3001
+async function getUser(authorization) {
+  const res = await fetch('http://localhost:3001/profile', {
+    headers: { authorization },
+    mode: 'cors'
   });
   if (res.status === 200) {
     return { authorization, user: res.data }
@@ -168,11 +171,19 @@ function getUser(authorization) {
   }
 }
 
-Login.getInitialProps = (ctx) => {
+// fetches the data at build time, passing it as props to 
+// parent component
+Login.getStaticProps = async (ctx) => {
   const { authorization } = parseCookies(ctx);
   const { token } = ctx.query;
-  const props = getUser(authorization || token);
-  return props;
+  try {
+    const props = getUser(authorization || token);
+    console.log(props);
+    if (props) return props;
+  } catch (err) {
+    console.error(err);
+    return;
+  }
 }
 
 export default Login;

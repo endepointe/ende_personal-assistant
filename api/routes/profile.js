@@ -1,11 +1,13 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { findOrCreate } = require('../db/testdb');
+const userUtils = require('../db/psql-utils');
+const JWT_KEY = "something_private_and_long_enough_to_secure";
+
 const router = express();
 
 router.use((req, res, next) => {
   const token = req.headers['authorization'];
-  jwt.verify(token, jwtKey, function (err, data) {
+  jwt.verify(token, JWT_KEY, function (err, data) {
     if (err) {
       res.status(401).send({ error: err });
     } else {
@@ -16,7 +18,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  user = findById(req.user.id);
+  user = userUtils.findById(req.user.id);
   res.send(user);
 });
 

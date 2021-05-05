@@ -2,7 +2,9 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const GithubStrategy = require('passport-github').Strategy;
+const Users = require('../db/psql-utils');
 
+/* // test
 const { addUser, getUser, findOrCreate, findById } = require('../db/testdb');
 const user1 = { id: 1369, fname: 'ende', lname: 'pointe' };
 const user2 = { id: 2468, fname: 'pointe', lname: 'ende' };
@@ -13,6 +15,7 @@ console.log(findById(user2))
 console.log(findById(user3)) // should return -1
 addUser(user3)
 console.log(findById(user3))
+*/
 const JWT_KEY = "something_private_and_long_enough_to_be_secure";
 
 const router = express();
@@ -22,9 +25,11 @@ passport.use(new GithubStrategy({
   callbackURL: "http://localhost:3001/auth/github/callback"
 },
 
-  function (accessToken, refreshToken, profile, cb) {
+  function (accessToken, refreshToken, profile, done) {
     // find or create the user and return the profile information
-    return cb(null, findOrCreate(profile));
+    console.log('profile: ', profile)
+    Users.findOrCreate(profile)
+    return done(null, profile);
   }
 ));
 
@@ -40,7 +45,6 @@ router.get('/github', (req, res, next) => {
 router.get(
   '/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }), (req, res, next) => {
-    console.log(res);
     const token = jwt.sign({ id: req.user.id }, JWT_KEY, { expiresIn: 60 * 60 * 24 * 1000 })
     req.logIn(req.user, function (err) {
       if (err) return next(err);;
