@@ -1,0 +1,151 @@
+
+@media screen and (min-width: 0px) {
+  .navbar {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--ende-blue);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .navbar_logo {
+    width: 100px;
+    object-fit: contain;
+    margin: 9px 10px;
+  }
+
+  .navbar_search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 20px;
+    margin: 0 10px;
+  }
+
+  .navbar_searchInput {
+    height: 12px;
+    padding: 10px;
+    border: none;
+    width: 100%;
+  }
+
+  .navbar_searchIcon {
+    padding: 5px;
+    height: 22px !important;
+    background-color: var(--ende-yellow); 
+  }
+
+  .navbar_nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .navbar_nav_links {
+    display: none;
+    margin-top: 2rem;
+    position: absolute; 
+    width: 100%;
+    top: 25px;
+    right: 0;
+  }
+  .show_nav_links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--ende-blue);
+  }
+  .show_nav_links > .navbar_option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .show_nav_links > .navbar_option > span:nth-child(1) {
+    display: none;
+  }
+  .show_nav_links > .navbar_option > span:nth-child(2) {
+    margin: 0.6rem 0;
+  }
+  .show_nav_links .navbar_optionBasket {
+    margin: 0.6rem 0;
+  }
+  .navbar_nav_menuBtn {
+    background: none;
+    border: none;
+    margin: 0 0.5rem;
+  }
+  .navbar_nav_menuBtn:hover {
+    cursor: pointer;
+  }
+  .navbar_nav_menuBtn div {
+    background-color: white;
+    width: 42px;
+    height: 3px;
+  }
+  .navbar_nav_menuBtn div:nth-child(2) {
+    margin: 0.6rem 0;
+  }
+
+  .navbar_option {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+  }
+
+  .navbar_option:hover {
+    cursor: pointer;
+  }
+
+  .navbar_option_1 {
+    font-size: 10px;
+  }
+
+  .navbar_option_2 {
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .navbar_optionBasket {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+
+  .navbar_basketCount {
+    margin-left: 10px;
+    margin-right: 10px;  
+  }
+
+  .navbar_nav {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .navbar_option {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .navbar_nav_links {
+    display: flex;
+    position: relative;
+    margin-top: 0rem;
+    top: 0px;
+    right: 0;
+  } 
+  .navbar_nav_menuBtn {
+    display: none;
+  }
+}
