@@ -1,7 +1,7 @@
 // api/app.js
 const express = require('express');
 const passport = require('passport');
-require('dotenv').config({ path: './env.test' })
+require('dotenv').config();
 
 const app = express();
 
@@ -14,9 +14,11 @@ app.use((_, res, next) => {
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
-})
+});
+
 app.use(passport.initialize());
 app.use('/auth', require('./routes/auth'));
+app.use('/profile', require('./routes/profile'));
 
 passport.serializeUser(function (user, cb) {
   cb(null, user);

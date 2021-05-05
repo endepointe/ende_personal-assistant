@@ -12,4 +12,23 @@ const getUser = () => {
   return users;
 }
 
-module.exports = { addUser, getUser };
+const findOrCreate = (user) => {
+  for (let i = 0; i < users.length; i++) {
+    if (user.id === users[i].id) {
+      return user;
+    }
+  }
+  addUser(user);
+  return user;
+}
+
+const findById = (user) => {
+  for (let i = 0; i < users.length; i++) {
+    if (user.id === users[i].id) {
+      return user;
+    }
+  }
+  return -1;
+}
+
+module.exports = { addUser, getUser, findOrCreate, findById };

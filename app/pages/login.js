@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useState } from 'react';
 import { useUser } from '../lib/hooks';
+import { parseCookies } from 'nookies';
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
@@ -139,17 +140,39 @@ const Login = () => {
             By signing-in, you agree to the [Business Name] Conditions of Use & Sale. Please see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
           </p>
 
-          <button
-            className={styles.login_google_registerLink}>
-            <a href="http://localhost:3000/api/authGoogle">
-              Sign-in with Google
+          {
+            !props.authorization &&
+            <button
+              className={styles.login_oauth_registerLink}>
+              <a href="http://localhost:3001/auth/github">
+                Sign-in with GitHub
             </a>
-          </button>
+            </button>
+          }
+
 
         </div>
       </div>
     </Layout>
   );
+}
+
+function getUser(authorization) {
+  const res = fetch('http://localhost:3001/user', {
+    headers: { authorization }
+  });
+  if (res.status === 200) {
+    return { authorization, user: res.data }
+  } else {
+    return { authorization }
+  }
+}
+
+Login.getInitialProps = (ctx) => {
+  const { authorization } = parseCookies(ctx);
+  const { token } = ctx.query;
+  const props = getUser(authorization || token);
+  return props;
 }
 
 export default Login;
