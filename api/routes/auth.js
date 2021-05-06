@@ -4,32 +4,18 @@ const passport = require('passport');
 const GithubStrategy = require('passport-github').Strategy;
 const Users = require('../db/psql-utils');
 
-/* // test
-const { addUser, getUser, findOrCreate, findById } = require('../db/testdb');
-const user1 = { id: 1369, fname: 'ende', lname: 'pointe' };
-const user2 = { id: 2468, fname: 'pointe', lname: 'ende' };
-const user3 = { id: 1472, fname: 'ftest', lname: 'ltest' };
-addUser(user1)
-addUser(user2)
-console.log(findById(user2))
-console.log(findById(user3)) // should return -1
-addUser(user3)
-console.log(findById(user3))
-*/
 const JWT_KEY = "something_private_and_long_enough_to_be_secure";
 
 const router = express();
+
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: "http://localhost:3001/auth/github/callback"
 },
-
   function (accessToken, refreshToken, profile, done) {
     // find or create the user and return the profile information
-    let data = Users.findOrCreate(profile)
-    console.log('data: ', data);
-    return done(null, profile);
+    return done(null, Users.findOrCreate(profile));
   }
 ));
 
@@ -44,13 +30,16 @@ router.get('/github', (req, res, next) => {
 
 router.get(
   '/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }), (req, res, next) => {
-    const token = jwt.sign({ id: req.user.id }, JWT_KEY, { expiresIn: 60 * 60 * 24 * 1000 })
-    req.logIn(req.user, function (err) {
-      if (err) return next(err);;
-      res.redirect(`http://localhost:3000?token=${token}`)
+  passport.authenticate('github', { failureRedirect: '/login' }), async (req, res, next) => {
+    const user = await req.user;
+    console.log("user: ", user.data.id);
+    const token = jwt.sign({ id: user.data.id }, JWT_KEY, { expiresIn: 60 * 60 * 24 * 1000 })
+    console.log('token: ', token);
+    // http://www.passportjs.org/docs/oauth2-api/
+    req.login(user.data.id, function (err) {
+      if (err) return next(err);
+      res.redirect(`http://localhost:3000`);
     });
-
   },
 );
 module.exports = router;

@@ -10,23 +10,21 @@ module.exports = {
       if (user === null) {
         let query = `INSERT INTO github_users (id, data) 
                      VALUES ($1,$2) 
-                     RETURNING data`;
+                     RETURNING id`;
         const newUser = await db.one(
           query,
-          [oAuthData.id, oAuthData._json, oAuthData._json]
+          [oAuthData.id, oAuthData._json]
         );
-        console.log('new user: ', newUser);
-        let value = await db.query('select * from github_users;');
-        console.log('value: ', value);
+        // console.log('new user: ', newUser);
         return newUser;
       }
-      console.log('user: ', user)
+      // console.log('user: ', user)
       return user;
     } catch (err) {
       console.error(err);
     }
   },
   findById: async (id) => {
-    return await db.one('select * from github_users where id = $1', id);
+    return await db.one('select * from github_users where id = $1', [id]);
   }
 };

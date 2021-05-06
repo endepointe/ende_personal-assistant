@@ -12,6 +12,7 @@ const Login = (props) => {
   const [verifyPassword, setVerifyPassword] = useState('');
   const [register, setRegister] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
+  console.log(props.user);
 
   useUser({ redirectTo: '/', redirectIfFound: true });
 
