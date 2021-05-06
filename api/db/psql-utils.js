@@ -8,11 +8,16 @@ module.exports = {
                                  FROM github_users
                                  WHERE id = '${oAuthData.id}';`);
       if (user === null) {
-        const newUser = await db.one(`INSERT INTO github_users VALUES (
-          '${oAuthData.id}',
-          '${oAuthData.data}'
-        )`)
-        console.log('new user: ', newUser)
+        let query = `INSERT INTO github_users (id, data) 
+                     VALUES ($1,$2) 
+                     RETURNING data`;
+        const newUser = await db.one(
+          query,
+          [oAuthData.id, oAuthData._json, oAuthData._json]
+        );
+        console.log('new user: ', newUser);
+        let value = await db.query('select * from github_users;');
+        console.log('value: ', value);
         return newUser;
       }
       console.log('user: ', user)
