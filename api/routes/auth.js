@@ -15,6 +15,7 @@ passport.use(new GithubStrategy({
 },
   function (accessToken, refreshToken, profile, done) {
     // find or create the user and return the profile information
+    console.log('accesstoken: ', accessToken, 'refreshtoken: ', refreshToken, 'profile: ', profile, 'done: ', done);
     return done(null, Users.findOrCreate(profile));
   }
 ));
