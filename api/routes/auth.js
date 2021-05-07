@@ -39,7 +39,7 @@ router.get(
     // http://www.passportjs.org/docs/oauth2-api/
     req.login(user.data.id, function (err) {
       if (err) return next(err);
-      res.redirect(`http://localhost:3000`);
+      res.redirect(`http://localhost:3000/`);
     });
   },
 );
