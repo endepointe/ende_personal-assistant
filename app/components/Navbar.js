@@ -45,7 +45,7 @@ const Navbar = () => {
         <div
           id="navbar_nav_links"
           className={styles.navbar_nav_links}>
-          <Link href='/login'>
+          <Link href='/auth'>
             <div className={styles.navbar_option}>
               <span className={styles.navbar_option_1}>
                 Hello Guest
@@ -55,6 +55,18 @@ const Navbar = () => {
             </span>
             </div>
           </Link>
+
+          {/* <Link href='/login'>
+            <div className={styles.navbar_option}>
+              <span className={styles.navbar_option_1}>
+                Hello Guest
+            </span>
+              <span className={styles.navbar_option_2}>
+                Sign-in
+            </span>
+            </div>
+          </Link>
+          */}
 
           <Link href="/orders">
             <div className={styles.navbar_option}>
