@@ -33,7 +33,7 @@ router.get(
   '/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }), async (req, res, next) => {
     const user = await req.user;
-    console.log("user: ", user.data.id);
+    console.log("User: ", user.data.id);
     const token = jwt.sign({ id: user.data.id }, JWT_KEY, { expiresIn: 60 * 60 * 24 * 1000 })
     console.log('token: ', token);
     // http://www.passportjs.org/docs/oauth2-api/
