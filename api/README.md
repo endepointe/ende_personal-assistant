@@ -3,7 +3,7 @@ dev:
 
 ```
   npm install
-  nodemon app
+  npm run dev 
 ```
 
 ### Authorization Overview: OAuth 2.0

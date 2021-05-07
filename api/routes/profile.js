@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const userUtils = require('../db/psql-utils');
+const UserDB = require('../db/psql-utils');
 const JWT_KEY = "something_private_and_long_enough_to_secure";
 
 const router = express();
@@ -18,7 +18,8 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  user = userUtils.findById(req.user.id);
+  user = UserDB.findById(req.user.id);
+  console.log('/api/routes/profile: ', user)
   res.send(user);
 });
 
