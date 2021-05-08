@@ -1,16 +1,53 @@
-import useSWR from 'swr';
-
-const fetcher = (url) => fetch(url).then((res) => res.text());
+import Link from 'next/link';
+import { signin, signout, useSession } from 'next-auth/client';
 
 export default function Auth() {
+  const [session, loading] = useSession();
 
-  const { data, error } = useSWR('/api/auth', fetcher)
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>Loading...</div>
+  const url = '/api/auth/google';
+
+  const handleAuth = async () => {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    console.log(await res.text());
+  }
 
   return (
     <div>
-      {`cookie from response: "${data}"`}
+      {!session && (
+        <a
+          href="/api/auth/signin"
+          onClick={(e) => {
+            e.preventDefault();
+            signin();
+          }}
+        >
+          <button>Sign in</button>
+        </a>
+      )}
+      {session && (
+        <>
+          <Link href="/profile">
+            <a>
+              <span
+                style={{ backgroundImage: `url(${session.user.image})` }}
+              />
+            </a>
+          </Link>
+          <span>{session.user.email}</span>
+          <a
+            href="/api/auth/signout"
+            onClick={(e) => {
+              e.preventDefault();
+              signout();
+            }}
+          >
+            <button>Sign out</button>
+          </a>
+        </>
+      )}
     </div>
   )
 }
