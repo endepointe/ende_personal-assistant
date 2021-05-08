@@ -1,3 +1,5 @@
+import Layout from '../components/Layout';
+import { signin, signout, useSession } from 'next-auth/client'
 import styles from '../styles/Navbar.module.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -6,12 +8,14 @@ import { useStateValue } from '../context/StateProvider';
 
 const Navbar = () => {
   const [{ basket }, dispatch] = useStateValue();
+  const [session, loading] = useSession();
 
   const toggleNavMenu = () => {
     console.log(document.getElementById('navbar_nav_links').classList);
     document.getElementById('navbar_nav_links').classList.toggle(styles.show_nav_links);
     console.log('open menu')
   }
+
 
   return (
     <div className={styles.navbar}>
@@ -42,28 +46,48 @@ const Navbar = () => {
         <div
           id="navbar_nav_links"
           className={styles.navbar_nav_links}>
-          <Link href='/auth'>
+          <Link href='/login'>
             <div className={styles.navbar_option}>
               <span className={styles.navbar_option_1}>
                 Hello Guest
             </span>
               <span className={styles.navbar_option_2}>
-                Sign-in
-            </span>
+                {/* Sign-in */}
+                {!session && (
+                  <a
+                    href="/auth/signin"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      signin(null, { callbackUrl: 'http://localhost:3000/' });
+                    }}
+                  >
+                    <button>Sign in</button>
+                  </a>
+                )}
+                {session && (
+                  <>
+                    <Link href="/profile">
+                      <a>
+                        <span
+                          style={{ backgroundImage: `url(${session.user.image})` }}
+                        />
+                      </a>
+                    </Link>
+                    <span>{session.user.email}</span>
+                    <a
+                      href="/auth/signout"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        signout(null, { callbackUrl: 'http://localhost:3000' });
+                      }}
+                    >
+                      <button>Sign out</button>
+                    </a>
+                  </>
+                )}
+              </span>
             </div>
           </Link>
-
-          {/* <Link href='/login'>
-            <div className={styles.navbar_option}>
-              <span className={styles.navbar_option_1}>
-                Hello Guest
-            </span>
-              <span className={styles.navbar_option_2}>
-                Sign-in
-            </span>
-            </div>
-          </Link>
-          */}
 
           <Link href="/orders">
             <div className={styles.navbar_option}>
