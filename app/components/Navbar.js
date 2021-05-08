@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
-import { signin, signout, useSession } from 'next-auth/client'
+import { signin, signout, useSession, getSession } from 'next-auth/client'
+import { useState, useEffect } from 'react';
 import styles from '../styles/Navbar.module.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -7,7 +8,7 @@ import Link from 'next/link';
 import { useStateValue } from '../context/StateProvider';
 
 const Navbar = () => {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const [session, loading] = useSession();
 
   const toggleNavMenu = () => {
@@ -16,6 +17,14 @@ const Navbar = () => {
     console.log('open menu')
   }
 
+  const signIn = (e) => {
+    e.preventDefault();
+    signin(null, { callbackUrl: 'http://localhost:3000/' });
+  }
+  const signOut = (e) => {
+    e.preventDefault();
+    signout();
+  }
 
   return (
     <div className={styles.navbar}>
@@ -46,22 +55,18 @@ const Navbar = () => {
         <div
           id="navbar_nav_links"
           className={styles.navbar_nav_links}>
-          <Link href='/login'>
+          <Link href='/'>
             <div className={styles.navbar_option}>
               <span className={styles.navbar_option_1}>
                 Hello Guest
-            </span>
+              </span>
               <span className={styles.navbar_option_2}>
-                {/* Sign-in */}
                 {!session && (
                   <a
-                    href="/auth/signin"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      signin(null, { callbackUrl: 'http://localhost:3000/' });
-                    }}
+                    href="/api/auth/signin"
+                    onClick={signIn}
                   >
-                    <button>Sign in</button>
+                    Sign in
                   </a>
                 )}
                 {session && (
@@ -73,15 +78,11 @@ const Navbar = () => {
                         />
                       </a>
                     </Link>
-                    <span>{session.user.email}</span>
                     <a
-                      href="/auth/signout"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        signout(null, { callbackUrl: 'http://localhost:3000' });
-                      }}
+                      href="/api/auth/signout"
+                      onClick={signOut}
                     >
-                      <button>Sign out</button>
+                      Sign out
                     </a>
                   </>
                 )}
@@ -93,10 +94,10 @@ const Navbar = () => {
             <div className={styles.navbar_option}>
               <span className={styles.navbar_option_1}>
                 Returns &
-            </span>
+              </span>
               <span className={styles.navbar_option_2}>
                 Orders
-            </span>
+              </span>
             </div>
           </Link>
 
@@ -104,10 +105,10 @@ const Navbar = () => {
             <div className={styles.navbar_option}>
               <span className={styles.navbar_option_1}>
                 Your
-          </span>
+              </span>
               <span className={styles.navbar_option_2}>
                 Account
-          </span>
+              </span>
             </div>
           </Link>
 

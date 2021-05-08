@@ -65,6 +65,14 @@
     align-items: center;
     justify-content: space-between;
   }
+  .navbar_option_2 > a {
+    text-decoration: none;
+    border: none;
+    color: #fff;
+  }
+  .navbar_option_2 > a:visited {
+    color: #fff;
+  }
   .show_nav_links > .navbar_option > span:nth-child(1) {
     display: none;
   }

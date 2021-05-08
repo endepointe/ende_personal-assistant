@@ -27,7 +27,7 @@ const options = {
       return url.startsWith(baseUrl)
         ? url
         : baseUrl
-    }
+    },
   },
   // signingKey: process.env.JWT_PRIVATE_KEY
 };
