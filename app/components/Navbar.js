@@ -8,13 +8,42 @@ import Link from 'next/link';
 import { useStateValue } from '../context/StateProvider';
 
 const Navbar = () => {
-  const [{ basket, user }, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
   const [session, loading] = useSession();
+
+  useEffect(async () => {
+    try {
+      const res = await fetch('/api/get-session');
+      const data = await res.json();
+      if (state.user === null) {
+        dispatch({
+          type: 'SET_USER',
+          user: {
+            name: data.user.name,
+            email: data.user.email,
+            image: data.user.image
+          }
+        });
+        console.log(state.user);
+      } else {
+        dispatch({
+          type: 'DELETE_USER',
+          user: {
+            name: null,
+            email: null,
+            image: null,
+          }
+        });
+        console.log(state.user);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [session])
 
   const toggleNavMenu = () => {
     console.log(document.getElementById('navbar_nav_links').classList);
     document.getElementById('navbar_nav_links').classList.toggle(styles.show_nav_links);
-    console.log('open menu')
   }
 
   const signIn = (e) => {
@@ -116,7 +145,7 @@ const Navbar = () => {
             <div className={styles.navbar_optionBasket}>
               <ShoppingBasketIcon />
               <span className={styles.navbar_option_2, styles.navbar_basketCount}>
-                {basket?.length}
+                {state.basket?.length}
               </span>
             </div>
           </Link>

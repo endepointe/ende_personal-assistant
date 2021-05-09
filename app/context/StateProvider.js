@@ -2,10 +2,9 @@ import { useReducer, useContext, createContext } from 'react'
 
 const StateContext = createContext();
 
-export const StateProvider = ({ reducer, initialState, children }) => {
-  // console.log('state count: ', state.count)
+export const StateProvider = ({ reducer, initialState, session, children }) => {
   return (
-    <StateContext.Provider value={useReducer(reducer, initialState)}>
+    <StateContext.Provider value={useReducer(reducer, initialState, session)}>
       {children}
     </StateContext.Provider>
   );

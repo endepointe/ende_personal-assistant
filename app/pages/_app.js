@@ -7,13 +7,12 @@ import { StateProvider } from '../context/StateProvider';
 import { Provider } from 'next-auth/client';
 
 function MyApp({ Component, pageProps }) {
-  const { session } = pageProps;
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <Provider options={{ site: process.env.SITE }} session={session}>
+    <Provider options={{ site: process.env.SITE }} session={pageProps.session}>
+      <StateProvider initialState={initialState} reducer={reducer} session={pageProps.session}>
         <Component {...pageProps} />
-      </Provider>
-    </StateProvider>
+      </StateProvider>
+    </Provider>
   )
 }
 
