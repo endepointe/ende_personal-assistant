@@ -13,31 +13,41 @@ const Navbar = () => {
   const [user, setUser] = useState({});
 
   useEffect(async () => {
-    const res = await fetch('/api/get-session');
-    const data = await res.json();
-    setUser({
-      name: data.user.name,
-      email: data.user.email,
-      image: data.user.image
-    });
-    // dispatch({
-    //   type: 'set_user',
-    //   user: {
-    //     name: data.user.name,
-    //     email: data.user.email,
-    //     image: data.user.image
-    //   }
-    // });
-    //
-    // dispatch({
-    //   type: 'DELETE_USER',
-    //   user: {
-    //     name: null,
-    //     email: null,
-    //     image: null,
-    //   }
-    // });
-    console.log(state.user);
+    try {
+      const res = await fetch('/api/get-session');
+      const data = await res.json();
+      if (res.status !== 401) {
+        setUser({
+          name: data.user.name,
+          email: data.user.email,
+          image: data.user.image
+        });
+        dispatch({
+          type: 'SET_USER',
+          user: {
+            name: data.user.name,
+            email: data.user.email,
+            image: data.user.image
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      setUser({
+        name: null,
+        email: null,
+        image: null
+      });
+      dispatch({
+        type: 'DELETE_USER',
+        user: {
+          name: null,
+          email: null,
+          image: null,
+        }
+      });
+    }
+    console.log(state.user, user);
   }, [session])
 
   const toggleNavMenu = () => {
@@ -79,7 +89,7 @@ const Navbar = () => {
           <div></div>
         </button>
 
-        {/* initiall hidden on small screens */}
+        {/* initially hidden on small screens */}
         <div
           id="navbar_nav_links"
           className={styles.navbar_nav_links}>
