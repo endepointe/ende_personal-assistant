@@ -1,5 +1,4 @@
 import Layout from '../components/Layout';
-import styles from '../styles/CheckoutProduct.module.css';
 import {
   useStateValue
 } from '../context/StateProvider';
@@ -15,20 +14,20 @@ const CheckoutProduct = ({ id, image, title, price, rating }) => {
   }
   return (
     <Layout>
-      <div className={styles.checkoutProduct}>
+      <div className="">
         <img
-          className={styles.checkoutProduct_image}
+          className=""}
           src={image} alt="" />
 
-        <div className={styles.checkoutProduct_info}>
-          <p className={styles.checkoutProduct_title}>
+        <div className="">
+          <p className="">
             {title}
           </p>
-          <p className={styles.checkoutProduct_price}>
+          <p className="">
             <small>$</small>
             <strong>{price}</strong>
           </p>
-          <div className={styles.checkoutProduct_rating}>
+          <div className="">
             {Array(rating).fill().map((_, i) => {
               return <p>*</p>
             })}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStateValue } from '../context/StateProvider';
-import styles from '../styles/Product.module.css';
 
 const Product = ({ id, title, image, price, rating }) => {
   const [{ basket }, dispatch] = useStateValue();
@@ -21,16 +20,16 @@ const Product = ({ id, title, image, price, rating }) => {
   };
 
   return (
-    <div className={styles.product}>
-      <div className={styles.product_info}>
+    <div className="">
+      <div className="">
         <p>{title}</p>
 
-        <p className={styles.product_price}>
+        <p className="">
           <small>$</small>
           <strong>{price}</strong>
         </p>
 
-        <div className={styles.product_rating}>
+        <div className="">
           {Array(rating).fill().map((_, i) => (
             <p key={i}>*</p>
           ))}
