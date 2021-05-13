@@ -6,6 +6,7 @@ const Home = () => {
     <div className={styles.home}>
       <div className={styles.home_container}>
         <div className={styles.home_header}>
+          {/* https://nextjs.org/docs/api-reference/next/image */}
           <img
             className={styles.home_image}
             src="business-card.jpg" alt="business card" />

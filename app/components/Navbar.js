@@ -1,5 +1,4 @@
-import Layout from '../components/Layout';
-import { signin, signout, useSession, getSession } from 'next-auth/client'
+import { signin, signout, useSession } from 'next-auth/client'
 import { useState, useEffect } from 'react';
 import styles from '../styles/Navbar.module.css';
 import SearchIcon from '@material-ui/icons/Search';
@@ -47,7 +46,6 @@ const Navbar = () => {
         }
       });
     }
-    console.log(state.user, user);
   }, [session])
 
   const toggleNavMenu = () => {

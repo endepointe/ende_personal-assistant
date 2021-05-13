@@ -42,3 +42,32 @@
     z-index: 1;
   }
 }
+/* 
+640
+768
+1024
+1280
+1536
+*/
+@media screen and (min-width: 640px) {
+  .home_header {
+  }
+  .home_image {
+    opacity: 0.5;
+    margin-bottom: -575px;
+  }
+  .home_shopNowButton {
+  }
+}
+@media screen and (min-width: 768px) {
+
+}
+@media screen and (min-width: 1024px) {
+
+}
+@media screen and (min-width: 1280px) {
+
+}
+@media screen and (min-width: 1536px) {
+
+}
