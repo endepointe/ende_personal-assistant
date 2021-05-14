@@ -16,7 +16,7 @@ const CheckoutProduct = ({ id, image, title, price, rating }) => {
     <Layout>
       <div className="">
         <img
-          className=""}
+          className=""
           src={image} alt="" />
 
         <div className="">

@@ -68,15 +68,18 @@ const Navbar = () => {
     signout();
   }
   return (
-    <div className="flex flex-nowrap items-center justify-between h-16 bg-dark-blue">
+    <div className="flex flex-row flex-nowrap items-center justify-between h-16 bg-dark-blue select-none">
+      {/* logo */}
       <Link href="/">
-        <a className="flex flex-row justify-center items-center">
+        <a className="flex flex-row justify-center items-center -ml-2.5">
           <img
             className="w-32"
             src="/logo_transparent.png" alt="" />
         </a>
       </Link>
-      <div className="flex items-center w-3/5">
+
+      {/* search box */}
+      <div className="flex items-center w-3/5 md:w-5/12">
         <input
           id="search-input"
           className="h-8 w-full pl-1 border-2 outline-none"
@@ -88,9 +91,12 @@ const Navbar = () => {
           className="text-yellow-200 text-5xl ml-2 w-4 h-6 cursor-pointer" />
       </div>
 
-      <div className="flex flex-col justify-center items-center mx-2.5">
+      {/* links */}
+      <div className="flex flex-col justify-center items-center mx-2.5 md:flex-row md:w-5/12">
+
+        {/* hide button on md screens */}
         <button
-          className="w-11 cursor-pointer border-none focus:outline-none"
+          className="w-11 cursor-pointer border-none focus:outline-none md:hidden"
           onClick={toggleNavMenu}
         >
           <div className="bg-white w-full h-1 my-0"></div>
@@ -99,21 +105,23 @@ const Navbar = () => {
         </button>
 
         {/* initially hidden on small screens */}
+        {/* shown on md screens and above */}
         <div
           id="navbar_nav_links"
-          className="hidden flex flex-col absolute top-16 left-0 right-0 items-center w-full bg-dark-blue text-white">
+          className="hidden flex flex-col absolute top-16 left-0 right-0 items-center w-full bg-dark-blue text-white select-none md:flex md:flex-row md:relative md:top-0 md:flex-nowrap">
           <Link href='/'>
-            <div>
-              <span>
-                Hello, {user.name ? user.name : 'Guest'}
+            <div className="flex justify-center w-full h-4 my-3 md:flex-col">
+              <span className="">
+                Hello,   &nbsp;{'|'}&nbsp;{user.name ? user.name : 'Guest'}
               </span>
-              <span>
+              <span className="cursor-pointer underline md:w-32">
                 {!session && (
                   <a
+                    className="ml-2"
                     href="/api/auth/signin"
                     onClick={signIn}
                   >
-                    {' |'} Sign in
+                    Sign in
                   </a>
                 )}
                 {session && (
@@ -127,9 +135,8 @@ const Navbar = () => {
                     </Link>
                     <a
                       href="/api/auth/signout"
-                      onClick={signOut}
-                    >
-                      {' |'} Sign out
+                      onClick={signOut}>
+                      &nbsp;{' |'} Sign out
                     </a>
                   </>
                 )}
@@ -138,10 +145,7 @@ const Navbar = () => {
           </Link>
 
           <Link href="/orders">
-            <div>
-              <span>
-                Returns &
-              </span>
+            <div className="flex justify-center w-full h-4 my-3 cursor-pointer">
               <span>
                 Orders
               </span>
@@ -149,10 +153,7 @@ const Navbar = () => {
           </Link>
 
           <Link href="/account">
-            <div>
-              <span>
-                Your
-              </span>
+            <div className="flex justify-center w-full h-4 my-3 cursor-pointer">
               <span>
                 Account
               </span>
@@ -160,7 +161,7 @@ const Navbar = () => {
           </Link>
 
           <Link href="/checkout">
-            <div>
+            <div className="flex justify-center w-full h-4 my-3 mb-5 cursor-pointer">
               <ShoppingBasketIcon />
               <span>
                 {state.basket?.length}
