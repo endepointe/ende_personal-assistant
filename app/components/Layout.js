@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Layout = (props) => {
   return (
@@ -9,7 +10,10 @@ const Layout = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      {props.children}
+      <div className="min-h-screen bg-app-bg">
+        {props.children}
+      </div>
+      <Footer />
     </>
   )
 }
