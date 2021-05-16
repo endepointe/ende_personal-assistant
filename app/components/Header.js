@@ -1,7 +1,12 @@
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import { useState, useEffect } from 'react';
+import {
+  useState,
+  useEffect,
+} from 'react';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+  const router = useRouter();
   const [arrows, setArrows] = useState({});
   useEffect(() => {
     setArrows(document.getElementById('find-assistant-arrows'));
@@ -12,6 +17,10 @@ export default function Header() {
   }
   const end = (e) => {
     arrows.classList.toggle('opacity-0')
+  }
+  const register = (e) => {
+    e.preventDefault();
+    router.push('/register')
   }
 
   return (
@@ -26,10 +35,11 @@ export default function Header() {
         <button
           onMouseEnter={begin}
           onMouseLeave={end}
+          onClick={register}
           className="bg-green-500 text-white w-max ml-8 mb-8 py-2 px-4 rounded-sm font-semibold">FIND AN ASSISTANT</button>
         <div
           id="find-assistant-arrows"
-          className="opacity-0 select-none ml-2 transition-opacity duration-500 ease-in-out">
+          className="opacity-0 select-none ml-2 transition-opacity duration-500 ease-linear">
           <DoubleArrowIcon
             className="text-gray-200 opacity-80"
             fontSize="large" />

@@ -6,6 +6,9 @@ const Home = () => {
   return (
     <main className="flex w-full justify-center text-black">
       <article className="flex flex-col w-full px-2">
+
+        {/* add secondary icons beneath the existing layer of icons */}
+
         <section className="flex flex-row my-4">
           <FavoriteIcon
             className="text-green-500"
