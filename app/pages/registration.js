@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import Image from 'next/image';
 import Input from '../components/form/input';
 import {
   useRouter,
@@ -77,9 +78,16 @@ export default function registration({ countrySpecs }) {
           </div>
 
           <h3 className="mt-12">PAYMENT INFORMATION</h3>
-          <div className="flex flex-row justify-center items-center mt-0 p-8 text-sm bg-white shadow-md border-gray-200 border-solid">
+          <div className="flex flex-row justify-center items-center mt-0 py-4 px-8 text-sm bg-app-bg shadow-none border-2 border-gray-200 border-solid">
             <p>We use Stripe to make sure your assistant gets paid on time and to keep your personal bank and details secure. Click Save and continue to set up your payments on Stripe.</p>
-            <p>stripe img</p>
+            <div className="w-64">
+              <a href="https://stripe.com" target="_blank">
+                <Image
+                  width={100}
+                  height={200}
+                  src="/stripe-logo-slate.svg" />
+              </a>
+            </div>
           </div>
 
           <button
