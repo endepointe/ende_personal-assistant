@@ -1,5 +1,6 @@
 import Link from 'next/link';
-
+// todo: 
+//    - display the 'LOG OUT' link after user logs in
 const Navbar = () => {
   return (
     <nav className="flex flex-row flex-nowrap items-center justify-between select-none bg-black">

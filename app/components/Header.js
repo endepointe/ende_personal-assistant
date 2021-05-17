@@ -18,9 +18,9 @@ export default function Header() {
   const end = (e) => {
     arrows.classList.toggle('opacity-0')
   }
-  const register = (e) => {
+  const onboarding = (e) => {
     e.preventDefault();
-    router.push('/register')
+    router.push('/onboarding')
   }
 
   return (
@@ -35,7 +35,7 @@ export default function Header() {
         <button
           onMouseEnter={begin}
           onMouseLeave={end}
-          onClick={register}
+          onClick={onboarding}
           className="bg-green-500 text-white w-max ml-8 mb-8 py-2 px-4 rounded-sm font-semibold text-lg">FIND AN ASSISTANT</button>
         <div
           id="find-assistant-arrows"

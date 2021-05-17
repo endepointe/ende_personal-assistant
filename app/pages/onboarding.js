@@ -1,8 +1,40 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import {
+  useState,
+  useEffect,
+} from 'react';
+import {
+  useRouter,
+} from 'next/router';
 import Layout from "../components/Layout";
 
 export default function onboarding() {
+  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('');
+
+  const body = {
+    email: email,
+    password: pass,
+  };
+
+  const setData = () => {
+    setEmail(document.getElementById('email').value);
+    setPass(document.getElementById('password').value);
+  }
+
+  const handleLocalOption = async (e) => {
+    e.preventDefault();
+    const res = await fetch('/api/onboarding', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+    const data = await res.text();
+    console.log(data);
+    router.push('/registration');
+    return;
+  }
   return (
     <Layout>
       <div className="flex flex-col items-center">
@@ -34,6 +66,7 @@ export default function onboarding() {
           </div>
 
           <button
+            onClick={handleLocalOption}
             className="bg-green-500 text-white w-full mt-9 py-2 px-4 rounded shadow-md text-lg font-medium">Continue</button>
         </form>
 
@@ -41,7 +74,7 @@ export default function onboarding() {
 
         <div className="flex flex-col w-11/12">
           {/* link height should be 3rem or 48 pixels */}
-          <Link href="/onboarding">
+          <Link href="/registration">
             <a className="flex justify-center items-center text-center w-full h-12 my-0.5 bg-white font-sans-Roboto font-normal shadow-sm hover:pointer">
               <div className="testLogo flex flex-row items-center">
                 <Image
@@ -55,7 +88,7 @@ export default function onboarding() {
               </div>
             </a>
           </Link>
-          <Link href="/onboarding">
+          <Link href="/registration">
             <a className="flex justify-center items-center text-center w-full h-12 my-0.5 bg-white font-sans-Roboto font-normal shadow-sm hover:pointer">
               <div className="testLogo flex flex-row items-center">
                 <Image
@@ -69,7 +102,7 @@ export default function onboarding() {
               </div>
             </a>
           </Link>
-          <Link href="/onboarding">
+          <Link href="/registration">
             <a className="flex justify-center items-center text-center w-full h-12 my-0.5 bg-white font-sans-Roboto font-normal shadow-sm hover:pointer">
               <div
                 className="testLogo flex flex-row items-center">
@@ -84,7 +117,7 @@ export default function onboarding() {
               </div>
             </a>
           </Link>
-          <Link href="/onboarding">
+          <Link href="/registration">
             <a className="flex justify-center items-center text-center w-full h-12 my-0.5 bg-white font-sans-Roboto font-normal shadow-sm hover:pointer">
               <div
                 className="testLogo flex flex-row items-center">
