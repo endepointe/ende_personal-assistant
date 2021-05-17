@@ -18,7 +18,7 @@
 export default function input(props) {
   return (
     <div className="flex flex-row items-center bg-white shadow-md border-gray-200 border-solid">
-      <div className="flex justify-end w-28 mr-2">
+      <div className="flex justify-end w-32 mr-4 ml-2">
         <div className="max-w-max">
           <label htmlFor={props.for} aria-label={props.aria}>{props.labelValue}</label>
         </div>
