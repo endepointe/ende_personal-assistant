@@ -88,7 +88,7 @@ export default function registration({ countrySpecs }) {
             <h3 className="text-gray-400 font-semibold">PAYMENT INFORMATION</h3>
             <div className="flex flex-row justify-center items-center mt-0 px-4 pr-3 text-sm bg-app-bg shadow-none border-2 border-gray-200 border-solid">
               <div className="w-5/6">
-                <p className="mr-1 text-sm text-gray-400 select-none">We use Stripe to make sure your assistant gets paid on time and to keep your personal bank and details secure. <strong className="font-bold text-gray-800">Click Save and Continue</strong> to set up your payments on Stripe.</p>
+                <p className="mr-1 my-1 text-sm text-gray-400 select-none">We use Stripe to make sure your assistant gets paid on time and to keep your personal bank and details secure. <strong className="font-bold text-gray-800">Click Save and Continue</strong> to set up your payments on Stripe.</p>
               </div>
               <div className="w-1/6">
                 <a
