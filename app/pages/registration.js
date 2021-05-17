@@ -27,7 +27,7 @@ export default function registration({ countrySpecs }) {
   return (
     <Layout>
       <div className="flex flex-col items-center select-none">
-        <h1 className="text-3xl font-medium mt-10 mb-8">Create your account</h1>
+        <h1 className="text-3xl font-medium mt-10 mb-8">Complete your profile</h1>
         {/* PREFIXES:
             - at_                       account type 
             - 
