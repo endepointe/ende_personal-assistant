@@ -1,49 +1,12 @@
-import Link from 'next/link'
+import Link from 'next/link';
 import Image from 'next/image';
-import Layout from '../components/Layout';
-import {
-  useRouter,
-} from 'next/router';
-import {
-  useState,
-  useEffect,
-} from 'react';
+import Layout from "../components/Layout";
 
-export default function Register() {
-  const router = useRouter();
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('');
-
-  useEffect(() => {
-    // console.log(body);
-  }, [email, pass])
-
-  const body = {
-    email: email,
-    password: pass,
-  };
-
-  const setData = () => {
-    setEmail(document.getElementById('email').value);
-    setPass(document.getElementById('password').value);
-  }
-
-  const handleLocalOption = async (e) => {
-    e.preventDefault();
-    const res = await fetch('/api/onboarding', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    });
-    const data = await res.text();
-    console.log(data);
-    router.push('/onboarding');
-    return;
-  }
-
+export default function onboarding() {
   return (
     <Layout>
       <div className="flex flex-col items-center">
-        <h1 className="text-3xl font-medium mt-10 mb-8">Create your account</h1>
+        <h1 className="text-3xl font-medium mt-10 mb-8">Complete your profile</h1>
 
         <form className="flex flex-col w-11/12">
           <div className="flex flex-row items-center bg-white shadow-md border-gray-200 border-solid rounded-t-md">
@@ -54,7 +17,6 @@ export default function Register() {
             </div>
             <input
               id="email"
-              onChange={setData}
               type="email" name="email" placeholder="jane@example.com"
               className="w-full h-12" />
           </div>
@@ -67,13 +29,11 @@ export default function Register() {
             </div>
             <input
               id="password"
-              onChange={setData}
               type="password" name="password" placeholder="********"
               className="w-full h-12 " />
           </div>
 
           <button
-            onClick={handleLocalOption}
             className="bg-green-500 text-white w-full mt-9 py-2 px-4 rounded shadow-md text-lg font-medium">Continue</button>
         </form>
 
@@ -142,5 +102,5 @@ export default function Register() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }

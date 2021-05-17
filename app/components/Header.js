@@ -36,7 +36,7 @@ export default function Header() {
           onMouseEnter={begin}
           onMouseLeave={end}
           onClick={register}
-          className="bg-green-500 text-white w-max ml-8 mb-8 py-2 px-4 rounded-sm font-semibold">FIND AN ASSISTANT</button>
+          className="bg-green-500 text-white w-max ml-8 mb-8 py-2 px-4 rounded-sm font-semibold text-lg">FIND AN ASSISTANT</button>
         <div
           id="find-assistant-arrows"
           className="opacity-0 select-none ml-2 transition-opacity duration-500 ease-linear">
