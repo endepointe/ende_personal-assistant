@@ -1,11 +1,13 @@
 import Layout from "../components/Layout";
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import PartnerNotice from '../components/stripe/PartnerNotice';
+import { useRouter } from 'next/router';
 
 export default function businessDetails() {
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push('/business-details')
+    router.push('/payment-details')
     return;
   }
 
