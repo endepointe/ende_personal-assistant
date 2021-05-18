@@ -20,7 +20,7 @@ export default function registration({ countrySpecs }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push('/authorization')
+    router.push('/verification')
     return;
   }
 
@@ -34,6 +34,7 @@ export default function registration({ countrySpecs }) {
       */}
         <form className="flex flex-col w-11/12">
           <fieldset>
+            {/* account type must be independent || company */}
             <section className="my-4">
               <legend>
                 <h3 className="text-gray-400 font-semibold">ACCOUNT TYPE</h3></legend>
@@ -57,20 +58,46 @@ export default function registration({ countrySpecs }) {
 
           <section className="my-4">
             <h3 className="text-gray-400 font-semibold">PERSONAL INFORMATION</h3>
-            <Input className="" func={setData} labelValue="*First Name" name="fname" id="fname" type="text" placeholder="Jane" for="fname" aria="first name" ></Input>
-
-            <Input func={setData} labelValue="*Last Name" name="lname" id="lname" type="text" placeholder="Gren" for="lname" aria="last name" ></Input>
+            <div className="flex flex-row items-center bg-white shadow-md border-gray-200 border-solid">
+              <div className="flex justify-end mr-4 ml-2">
+                <div className="w-32">
+                  <label htmlFor="fname" aria-label="First name">*First name</label>
+                </div>
+              </div>
+              {/* only the input has dimensions */}
+              <input
+                id="fname"
+                onChange={setData}
+                type="text" placeholder="Jane"
+                className="w-full h-12" />
+            </div>
 
             <div className="flex flex-row items-center bg-white shadow-md border-gray-200 border-solid">
-              <div className="flex justify-end w-32 mr-4 ml-2">
-                <label htmlFor="country"
-                  aria-label="country">Country</label>
+              <div className="flex justify-end mr-4 ml-2">
+                <div className="w-32">
+                  <label htmlFor="lname" aria-label="Last name">*Last name</label>
+                </div>
+              </div>
+              {/* only the input has dimensions */}
+              <input
+                id="lname"
+                onChange={setData}
+                type="text" placeholder="Green"
+                className="w-full h-12" />
+            </div>
+
+            <div className="flex flex-row items-center bg-white shadow-md border-gray-200 border-solid">
+              <div className="flex justify-end ml-2">
+                <label
+                  htmlFor="country"
+                  aria-label="country"
+                  className="w-32 pl-5">Country</label>
               </div>
               <select
                 id="country"
                 placeholder="Country"
                 name="country"
-                className="w-full h-12 ">
+                className="w-full h-12 pl-3">
                 {/* get 2-char list of country codes */}
                 <option value="US">United States</option>
                 {/* see todo list below */}
