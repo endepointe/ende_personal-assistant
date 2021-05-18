@@ -15,7 +15,7 @@
               className="w-full h-12" />
         </div>
 */
-export default function input(props) {
+export default function Input(props) {
   return (
     <div className="flex flex-row items-center bg-white shadow-md border-gray-200 border-solid">
       <div className="flex justify-end w-32 mr-4 ml-2">

@@ -1,6 +1,6 @@
 import Layout from '../components/Layout';
 import Image from 'next/image';
-import Input from '../components/form/input';
+import Input from '../components/form/Input';
 import {
   useRouter,
 } from 'next/router';
@@ -20,7 +20,7 @@ export default function registration({ countrySpecs }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push('/registration')
+    router.push('/authorization')
     return;
   }
 
