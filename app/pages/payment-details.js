@@ -5,7 +5,11 @@ import TestModeInfo from '../components/stripe/TestModeInfo';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import { useRouter } from 'next/router';
-
+/*
+// The customer can opt out of providing their payment details.
+// When the customer has posted a job, a badge will be displayed,
+// indicating that they have verified their payment method.
+*/
 export default function paymentDetails() {
   const router = useRouter();
   const handleSubmit = async (e) => {

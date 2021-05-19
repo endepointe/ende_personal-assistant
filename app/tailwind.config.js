@@ -6,6 +6,9 @@ module.exports = {
       colors: {
         'app-bg': '#f6f9fc'
       },
+      transitionProperty: {
+        'width': 'width',
+      }
     }
   },
   variants: {

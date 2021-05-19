@@ -61,7 +61,7 @@ export default function authorization() {
                     name="mobile"
                     placeholder="(201) 555-1234"
                     type="tel"
-                    className="h-12 pl-12" />
+                    className="h-12 w-full pl-12" />
                 </div>
                 <p className="text-sm text-gray-600 mt-1">
                   We will text this number to verify your account. In test mode, you can skip this with <span className="font-semibold text-blue-500">the test phone number</span>.</p>

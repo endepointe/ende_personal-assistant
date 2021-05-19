@@ -7,7 +7,7 @@ const Navbar = () => {
       <Link href="/">
         <a className="flex flex-row justify-center items-center -ml-2.5 opacity-100 z-10">
           <img
-            className="w-32 -mt-6 -mb-6"
+            className="w-32"
             src="/logo_transparent.png" alt="health and fitness" />
         </a>
       </Link>
