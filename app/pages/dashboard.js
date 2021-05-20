@@ -55,7 +55,7 @@ export default function dashboard() {
     <Layout>
       <aside
         id="sidebar"
-        className="absolute h-screen -ml-60 w-6/12 flex flex-col justify-start items-center overflow-hidden bg-black opacity-90 transition-spacing duration-500">
+        className="absolute h-screen -ml-60 flex flex-col justify-start items-center overflow-hidden bg-black opacity-90 transition-spacing duration-500">
         <nav className="pt-5">
           <ul
             className="text-white">
@@ -63,13 +63,13 @@ export default function dashboard() {
               <button
                 onClick={display}
                 value={1}
-                className="font-bold hover:underline">Post a task</button>
+                className="mx-4 font-bold hover:underline">Post a task</button>
             </li>
             <li className="my-4">
               <button
                 onClick={display}
                 value={2}
-                className="font-bold hover:underline">View existing tasks</button>
+                className="mx-4 font-bold hover:underline">View existing tasks</button>
             </li>
           </ul>
         </nav>
