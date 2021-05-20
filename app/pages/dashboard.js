@@ -8,15 +8,31 @@ import { useState } from 'react';
 
 const fetcher = url => fetch(url).then(res => res.json());
 
-function Switch(props) {
-  if (props.val === 1) return <h1>create a task</h1>;
-  if (props.val === 2) return <h1>view existing tasks</h1>;
+function CreateTask(props) {
+  return <h1>create a task</h1>
+}
+
+function ViewExistingTasks(props) {
+  return <h1>view existing tasks</h1>
+}
+
+function Window(props) {
+  const val = parseInt(props.val);
+  switch(val) {
+    case 1:
+      return <CreateTask/>;
+    case 2:
+      return <ViewExistingTasks/>;
+    default:
+      return null;
+  }
 }
 
 export default function dashboard() {
   // const { data, error } = useSWR('/api/test', fetcher);
-  const [d, setDisplay] = useState(1);
+  const [d, setDisplay] = useState(0);
   const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     router.push('/dashboard')
@@ -32,7 +48,7 @@ export default function dashboard() {
 
   const display = (e) => {
     console.log(e.target.value)
-    setDisplay(e.target.value)
+    setDisplay(e.target.value);
   }
 
   return (
@@ -63,7 +79,7 @@ export default function dashboard() {
         </nav>
         <main className="w-full flex flex-col">
           <section>
-
+          <Window val={d}/>
           </section>
           <button
             onClick={showMenu}
