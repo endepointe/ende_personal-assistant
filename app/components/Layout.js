@@ -6,7 +6,7 @@ const Layout = (props) => {
   return (
     <>
       <Head>
-        <title>Ende Ecomm 1</title>
+        <title>Personal Assistant</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />

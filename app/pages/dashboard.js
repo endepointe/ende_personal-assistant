@@ -1,7 +1,12 @@
 import useSWR from 'swr';
 import Layout from '../components/Layout';
 import Box from '../components/Box';
-import Tabs from '../components/Tabs';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HelpIcon from '@material-ui/icons/Help';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -16,13 +21,13 @@ function ViewExistingTasks(props) {
   return <h1>view existing tasks</h1>
 }
 
-function Window(props) {
+function Tabs(props) {
   const val = parseInt(props.val);
-  switch(val) {
+  switch (val) {
     case 1:
-      return <CreateTask/>;
+      return <CreateTask />;
     case 2:
-      return <ViewExistingTasks/>;
+      return <ViewExistingTasks />;
     default:
       return null;
   }
@@ -40,10 +45,27 @@ export default function dashboard() {
   }
 
   const showMenu = () => {
-    // margin-left must be the same as the margin-left
-    // in the parent
     let parent = document.getElementById('sidebar');
-    parent.classList.toggle('-ml-60')
+    parent.classList.toggle('-left-full')
+  }
+  const accountDropDown = () => {
+    let parent = document.getElementById('accountDropDown');
+    parent.classList.toggle('hidden')
+  }
+
+  const postTaskDropDown = () => {
+    let parent = document.getElementById('postTaskDropDown');
+    parent.classList.toggle('hidden')
+  }
+
+  const viewTaskDropDown = () => {
+    let parent = document.getElementById('viewTaskDropDown');
+    parent.classList.toggle('hidden')
+  }
+
+  const reportsDropDown = () => {
+    let parent = document.getElementById('reportsDropDown');
+    parent.classList.toggle('hidden')
   }
 
   const display = (e) => {
@@ -55,21 +77,128 @@ export default function dashboard() {
     <Layout>
       <aside
         id="sidebar"
-        className="absolute h-screen -ml-60 flex flex-col justify-start items-center overflow-hidden bg-black opacity-90 transition-spacing duration-500">
-        <nav className="pt-5">
+        className="absolute h-screen w-full -left-full flex flex-col justify-start overflow-hidden bg-black opacity-90 select-none">
+        <nav className="w-full pt-5 px-5">
           <ul
             className="text-white">
+            <hr />
             <li className="my-4">
               <button
-                onClick={display}
+                onClick={display, accountDropDown}
                 value={1}
-                className="mx-4 font-bold hover:underline">Post a task</button>
+                className="w-full flex flex-row justify-between items-center font-bold z-10 focus:outline-none">
+                <div>
+                  <AccountCircleIcon
+                    fontSize="large" />
+                  <span className="ml-2">[insert user name]</span>
+                </div>
+                <ArrowDropDownIcon
+                  fontSize="large" />
+              </button>
+              <ul
+                id="accountDropDown"
+                className="z-0 hidden">
+                <li>[account]</li>
+              </ul>
             </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display, postTaskDropDown}
+                value={1}
+                className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
+                <span>Post a task</span>
+                <ArrowDropDownIcon
+                  fontSize="large" />
+              </button>
+              <ul
+                id="postTaskDropDown"
+                className="z-0 hidden">
+                <li>post task</li>
+              </ul>
+            </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display, viewTaskDropDown}
+                value={2}
+                className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
+                <span>View tasks</span>
+                <ArrowDropDownIcon
+                  fontSize="large" />
+              </button>
+              <ul
+                id="viewTaskDropDown"
+                className="z-0 hidden">
+                <li>view tasks</li>
+              </ul>
+            </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display, reportsDropDown}
+                value={3}
+                className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
+                <span>Reports</span>
+                <ArrowDropDownIcon
+                  fontSize="large" />
+              </button>
+              <ul
+                id="reportsDropDown"
+                className="z-0 hidden">
+                <li>reports</li>
+              </ul>
+            </li>
+            <hr />
             <li className="my-4">
               <button
                 onClick={display}
-                value={2}
-                className="mx-4 font-bold hover:underline">View existing tasks</button>
+                value={4}
+                className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
+                <span>Messages</span>
+              </button>
+            </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display}
+                value={5}
+                className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
+                <span>Help</span>
+                <HelpIcon
+                  fontSize="large" />
+              </button>
+            </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display}
+                value={6}
+                className="w-full flex flex-row justify-between items-center font-bold focuc:outline-none">
+                <span>Notifications</span>
+                <NotificationsIcon
+                  fontSize="large" />
+              </button>
+            </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display}
+                value={7}
+                className="w-full flex flex-row justify-start items-center font-bold focus:outline-none">
+                <SettingsIcon fontSize="large" />
+                <span className="ml-2">Settings</span>
+              </button>
+            </li>
+            <hr />
+            <li className="my-4">
+              <button
+                onClick={display}
+                value={8}
+                className="w-full flex flex-row justify-start items-center font-bold focus:outline-none">
+                <ExitToAppIcon fontSize="large" />
+                <span className="ml-2">Logout</span>
+              </button>
             </li>
           </ul>
         </nav>
@@ -79,7 +208,7 @@ export default function dashboard() {
         </nav>
         <main className="w-full flex flex-col">
           <section>
-          <Window val={d}/>
+            <Tabs val={d} />
           </section>
           <button
             onClick={showMenu}
