@@ -207,18 +207,20 @@ export default function dashboard() {
           </ul>
         </nav>
       </aside>
-      <section className="flex flex-col">
-        <nav className="">
-        </nav>
-        <main className="w-full flex flex-col">
-          <section>
-            <Tabs value={tab} />
-          </section>
-          <button
-            onClick={showMenu}
-            className="fixed bottom-4 right-4 w-20 h-20 rounded-full bg-blue-500 text-white focus:outline-none active:bg-blue-600">Menu</button>
-        </main>
-      </section>
+      <Box>
+        <section className="flex flex-col">
+          <nav className="">
+          </nav>
+          <main className="w-full flex flex-col">
+            <section>
+              <Tabs value={tab} />
+            </section>
+            <button
+              onClick={showMenu}
+              className="fixed bottom-4 right-4 w-20 h-20 rounded-full bg-blue-500 text-white focus:outline-none active:bg-blue-600">Menu</button>
+          </main>
+        </section>
+      </Box>
     </Layout>
   )
 }
