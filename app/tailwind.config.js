@@ -10,10 +10,12 @@ module.exports = {
         'width': 'width',
         'spacing': 'margin, padding',
       }
-    }
+    },
   },
   variants: {
     extend: {
+      cursor: ['hover'],
+      backgroundColor: ['active'],
     },
   },
   plugins: [],

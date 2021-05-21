@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import Layout from '../components/Layout';
 import Box from '../components/Box';
+import Tabs from '../components/dashboard/Tabs';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HelpIcon from '@material-ui/icons/Help';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -10,32 +11,15 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-
+// sometime ill use this
 const fetcher = url => fetch(url).then(res => res.json());
-
-function CreateTask(props) {
-  return <h1>create a task</h1>
-}
-
-function ViewExistingTasks(props) {
-  return <h1>view existing tasks</h1>
-}
-
-function Tabs(props) {
-  const val = parseInt(props.val);
-  switch (val) {
-    case 1:
-      return <CreateTask />;
-    case 2:
-      return <ViewExistingTasks />;
-    default:
-      return null;
-  }
-}
 
 export default function dashboard() {
   // const { data, error } = useSWR('/api/test', fetcher);
-  const [d, setDisplay] = useState(0);
+  const [tab, setTab] = useState('');
+  // sets the recently open tab for closing after
+  // a menu selection has been made.
+  const [openTab, setOpenTab] = useState({});
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -43,34 +27,45 @@ export default function dashboard() {
     router.push('/dashboard')
     return;
   }
-
   const showMenu = () => {
     let parent = document.getElementById('sidebar');
     parent.classList.toggle('-left-full')
   }
-  const accountDropDown = () => {
+  const accountDropDown = (e) => {
+    console.log(e.target)
     let parent = document.getElementById('accountDropDown');
     parent.classList.toggle('hidden')
   }
-
-  const postTaskDropDown = () => {
-    let parent = document.getElementById('postTaskDropDown');
-    parent.classList.toggle('hidden')
+  const taskDropDown = (e) => {
+    console.log(e.target);
+    let parent = document.getElementById('taskDropDown');
+    parent.classList.toggle('hidden');
+    // add parent to the list of open tabs. These tabs will
+    // be closed when the sidemenu is closed.
+    setOpenTab(parent);
   }
 
-  const viewTaskDropDown = () => {
-    let parent = document.getElementById('viewTaskDropDown');
+  const viewTalentDropDown = () => {
+    let parent = document.getElementById('viewTalentDropDown');
     parent.classList.toggle('hidden')
   }
 
   const reportsDropDown = () => {
     let parent = document.getElementById('reportsDropDown');
     parent.classList.toggle('hidden')
+    console.log(openTabs)
   }
 
+  const closeOpenTab = () => {
+    openTab.classList.toggle('hidden');
+  }
+
+  // displays the component based on selected element's value
   const display = (e) => {
-    console.log(e.target.value)
-    setDisplay(e.target.value);
+    console.log("e: ", e, e.target.attributes[0].value)
+    setTab(e.target.attributes[0].value);
+    showMenu();
+    closeOpenTab();
   }
 
   return (
@@ -84,8 +79,7 @@ export default function dashboard() {
             <hr />
             <li className="my-4">
               <button
-                onClick={display, accountDropDown}
-                value={1}
+                onClick={accountDropDown}
                 className="w-full flex flex-row justify-between items-center font-bold z-10 focus:outline-none">
                 <div>
                   <AccountCircleIcon
@@ -97,47 +91,59 @@ export default function dashboard() {
               </button>
               <ul
                 id="accountDropDown"
-                className="z-0 hidden">
+                className="hidden">
                 <li>[account]</li>
               </ul>
             </li>
             <hr />
             <li className="my-4">
               <button
-                onClick={display, postTaskDropDown}
-                value={1}
+                onClick={taskDropDown}
                 className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
-                <span>Post a task</span>
+                <span>Tasks</span>
                 <ArrowDropDownIcon
                   fontSize="large" />
               </button>
               <ul
-                id="postTaskDropDown"
-                className="z-0 hidden">
-                <li>post task</li>
+                id="taskDropDown"
+                className="hidden pl-5">
+                <li
+                  value="VIEW_TASKS"
+                  onClick={display}
+                  className="hover:cursor-pointer hover:underline my-1">My Tasks</li>
+                <li
+                  value="VIEW_ALL_TASK_POSTS"
+                  onClick={display}
+                  className="hover:cursor-pointer hover:underline my-1">All Task Posts</li>
+                <li
+                  value="VIEW_ALL_CONTRACTS"
+                  onClick={display}
+                  className="hover:cursor-pointer hover:underline my-1">All Contracts</li>
+                <li
+                  value="POST_TASK"
+                  onClick={display}
+                  className="hover:cursor-pointer hover:underline my-1">Post a Task</li>
               </ul>
             </li>
             <hr />
             <li className="my-4">
               <button
-                onClick={display, viewTaskDropDown}
-                value={2}
+                onClick={viewTalentDropDown}
                 className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
-                <span>View tasks</span>
+                <span>Talent</span>
                 <ArrowDropDownIcon
                   fontSize="large" />
               </button>
               <ul
-                id="viewTaskDropDown"
+                id="viewTalentDropDown"
                 className="z-0 hidden">
-                <li>view tasks</li>
+                <li>view talent</li>
               </ul>
             </li>
             <hr />
             <li className="my-4">
               <button
-                onClick={display, reportsDropDown}
-                value={3}
+                onClick={reportsDropDown}
                 className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
                 <span>Reports</span>
                 <ArrowDropDownIcon
@@ -184,7 +190,6 @@ export default function dashboard() {
             <li className="my-4">
               <button
                 onClick={display}
-                value={7}
                 className="w-full flex flex-row justify-start items-center font-bold focus:outline-none">
                 <SettingsIcon fontSize="large" />
                 <span className="ml-2">Settings</span>
@@ -194,7 +199,6 @@ export default function dashboard() {
             <li className="my-4">
               <button
                 onClick={display}
-                value={8}
                 className="w-full flex flex-row justify-start items-center font-bold focus:outline-none">
                 <ExitToAppIcon fontSize="large" />
                 <span className="ml-2">Logout</span>
@@ -208,11 +212,11 @@ export default function dashboard() {
         </nav>
         <main className="w-full flex flex-col">
           <section>
-            <Tabs val={d} />
+            <Tabs value={tab} />
           </section>
           <button
             onClick={showMenu}
-            className="fixed bottom-4 right-4 w-20 h-20 rounded-full bg-blue-500 text-white border-none">Menu</button>
+            className="fixed bottom-4 right-4 w-20 h-20 rounded-full bg-blue-500 text-white focus:outline-none active:bg-blue-600">Menu</button>
         </main>
       </section>
     </Layout>

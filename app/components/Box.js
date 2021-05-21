@@ -1,20 +1,3 @@
-/*
-  props:
-    - name
-    - value
-    - for
-    - id
-    - type
-    - placeholder
-    - aria-label
-
-            <input
-              id="lname"
-              onChange={setData}
-              type="text" name="lname" placeholder="Gren"
-              className="w-full h-12" />
-        </div>
-*/
 export default function Box({ children }) {
   return (
     <div className="flex flex-col items-center select-none">
