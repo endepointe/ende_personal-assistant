@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import Layout from '../components/Layout';
 import Box from '../components/Box';
-import Tabs from '../components/dashboard/Tabs';
+import { DashboardReducer } from '../context/reducers';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HelpIcon from '@material-ui/icons/Help';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -213,7 +213,7 @@ export default function dashboard() {
           </nav>
           <main className="w-full flex flex-col">
             <section>
-              <Tabs value={tab} />
+              <DashboardReducer value={tab} />
             </section>
             <button
               onClick={showMenu}

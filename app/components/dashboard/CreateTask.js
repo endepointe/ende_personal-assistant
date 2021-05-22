@@ -1,6 +1,6 @@
-import Box from '../../Box';
-import Input from '../../form/Input';
-import Button from '../../form/Button';
+import Box from '../Box';
+import Input from '../form/Input';
+import Button from '../form/Button';
 import { useEffect, useState } from 'react';
 
 export default function CreateTask(props) {
