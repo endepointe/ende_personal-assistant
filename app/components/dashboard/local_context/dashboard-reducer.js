@@ -1,8 +1,8 @@
 // possible global state values would go here
-import CreateTask from '../components/dashboard/CreateTask';
-import ViewTasks from '../components/dashboard/ViewTasks';
-import ViewAllTaskPosts from '../components/dashboard/ViewAllTaskPosts';
-import ViewAllContracts from '../components/dashboard/ViewAllContracts';
+import CreateTask from '../CreateTask';
+import ViewTasks from '../ViewTasks';
+import ViewAllTaskPosts from '../ViewAllTaskPosts';
+import ViewAllContracts from '../ViewAllContracts';
 
 export const DashboardReducer = (props) => {
   console.log(props)

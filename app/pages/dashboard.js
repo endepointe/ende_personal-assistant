@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import Layout from '../components/Layout';
 import Box from '../components/Box';
-import { DashboardReducer } from '../context/reducers';
+import { DashboardReducer } from '../components/dashboard/local_context/dashboard-reducer';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HelpIcon from '@material-ui/icons/Help';
 import NotificationsIcon from '@material-ui/icons/Notifications';
