@@ -62,7 +62,7 @@ export default function onboardingReview() {
           <button className="w-full flex flex-row justify-between bg-blue-50 border rounded text-xs p-4">
             <div className="flex flex-row">
               <AccountBalanceIcon
-                fontSize="medium" />
+                fontSize="small" />
               <div className="ml-3 flex flex-col items-start">
                 <span className="font-bold text-base">Your bank name</span>
                 <span className="mt-1">last four of card number 1234</span>

@@ -5,7 +5,6 @@ import ViewAllTaskPosts from '../ViewAllTaskPosts';
 import ViewAllContracts from '../ViewAllContracts';
 
 export const DashboardReducer = (props) => {
-  console.log(props)
   const action = props.action;
   switch (action) {
     case 'POST_TASK':
