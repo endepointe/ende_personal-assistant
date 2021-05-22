@@ -1,15 +1,19 @@
-// possible global state values would go here
-const initialState = { value: 0 };
 import CreateTask from '../CreateTask';
 import ViewTasks from '../ViewTasks';
 import ViewAllTaskPosts from '../ViewAllTaskPosts';
 import ViewAllContracts from '../ViewAllContracts';
+
+///////////////////
+// Reducer examples
+// possible global state values would go here
+const initialState = { value: 0 };
 
 // Array reducer
 const arr = [1, 2, 3, 4, 5];
 const initialValue = 0;
 const total = arr.reduce(sum, initialValue);
 function sum(prevResult, currItem) {
+  console.log(`previous total: ${prevResult},\ncurrent item: ${currItem}`)
   return prevResult + currItem;
 }
 console.log("total: ", total)
@@ -36,7 +40,8 @@ function counterReducer(state = initialState, action) {
   }
   return state;
 }
-
+// end reducer examples
+///////////////////////
 
 
 export const DashboardReducer = (props) => {
