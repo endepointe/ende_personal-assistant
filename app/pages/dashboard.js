@@ -60,10 +60,10 @@ export default function dashboard() {
     openTab.classList.toggle('hidden');
   }
 
-  // displays the component based on selected element's value
+  // displays the component based on selected element's action 
   const display = (e) => {
-    console.log("e: ", e, e.target.attributes[0].value)
-    setTab(e.target.attributes[0].value);
+    console.log("e: ", e, e.target.attributes[0].action)
+    setTab(e.target.attributes[0].action);
     showMenu();
     closeOpenTab();
   }
@@ -108,19 +108,19 @@ export default function dashboard() {
                 id="taskDropDown"
                 className="hidden pl-5">
                 <li
-                  value="VIEW_TASKS"
+                  action="VIEW_TASKS"
                   onClick={display}
                   className="hover:cursor-pointer hover:underline my-1">My Tasks</li>
                 <li
-                  value="VIEW_ALL_TASK_POSTS"
+                  action="VIEW_ALL_TASK_POSTS"
                   onClick={display}
                   className="hover:cursor-pointer hover:underline my-1">All Task Posts</li>
                 <li
-                  value="VIEW_ALL_CONTRACTS"
+                  action="VIEW_ALL_CONTRACTS"
                   onClick={display}
                   className="hover:cursor-pointer hover:underline my-1">All Contracts</li>
                 <li
-                  value="POST_TASK"
+                  action="POST_TASK"
                   onClick={display}
                   className="hover:cursor-pointer hover:underline my-1">Post a Task</li>
               </ul>
@@ -159,7 +159,7 @@ export default function dashboard() {
             <li className="my-4">
               <button
                 onClick={display}
-                value={4}
+                action={4}
                 className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
                 <span>Messages</span>
               </button>
@@ -168,7 +168,7 @@ export default function dashboard() {
             <li className="my-4">
               <button
                 onClick={display}
-                value={5}
+                action={5}
                 className="w-full flex flex-row justify-between items-center font-bold focus:outline-none">
                 <span>Help</span>
                 <HelpIcon
@@ -179,7 +179,7 @@ export default function dashboard() {
             <li className="my-4">
               <button
                 onClick={display}
-                value={6}
+                action={6}
                 className="w-full flex flex-row justify-between items-center font-bold focuc:outline-none">
                 <span>Notifications</span>
                 <NotificationsIcon
@@ -213,7 +213,7 @@ export default function dashboard() {
           </nav>
           <main className="w-full flex flex-col">
             <section>
-              <DashboardReducer value={tab} />
+              <DashboardReducer action={tab} />
             </section>
             <button
               onClick={showMenu}

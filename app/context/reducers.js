@@ -4,6 +4,8 @@ import ViewTasks from '../components/dashboard/ViewTasks';
 import ViewAllTaskPosts from '../components/dashboard/ViewAllTaskPosts';
 import ViewAllContracts from '../components/dashboard/ViewAllContracts';
 
+// in the redux branch
+
 export const DashboardReducer = (props) => {
   console.log(props)
   const val = props.value;
