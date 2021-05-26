@@ -62,8 +62,8 @@ export default function dashboard() {
 
   // displays the component based on selected element's action 
   const display = (e) => {
-    console.log("e: ", e, e.target.attributes[0].action)
-    setTab(e.target.attributes[0].action);
+    // console.log('e.target.attributes[0]', e.target.attributes.action.nodeValue);
+    setTab(e.target.attributes.action.nodeValue);
     showMenu();
     closeOpenTab();
   }

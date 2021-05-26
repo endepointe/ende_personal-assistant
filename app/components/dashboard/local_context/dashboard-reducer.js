@@ -13,10 +13,9 @@ const arr = [1, 2, 3, 4, 5];
 const initialValue = 0;
 const total = arr.reduce(sum, initialValue);
 function sum(prevResult, currItem) {
-  console.log(`previous total: ${prevResult},\ncurrent item: ${currItem}`)
   return prevResult + currItem;
 }
-console.log("total: ", total)
+console.log("reduction total: ", total)
 
 // Action object
 const addTodoAction = {
