@@ -3,6 +3,7 @@ import Input from '../form/Input';
 import Button from '../form/Button';
 import React,
 { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const SetHeadline = (props) => {
   return (
@@ -29,6 +30,7 @@ const SetHeadline = (props) => {
             </ul>
           </div>
         </section>
+
         <Button
           className="bg-gray-300 font-semibold text-gray-600 text-lg rounded-3xl"
           onClick={props.onClick}>Next: Skills</Button>
@@ -93,49 +95,52 @@ const SetRate = (props) => {
   )
 }
 
-const StepsController = () => {
+const Controllers = {
+  setHeadline: (e) => {
+    console.log('set headline')
+  },
+  setSkills: (e) => {
+    console.log('set skills')
+  },
+  setRate: (e) => {
+    console.log('set pay rate')
+  }
+}
+
+// disable button if the user has not entered a valid headline,
+// otherwise, turn the button green and show a message in green
+// font in the area indicated below the input field.
+
+const StepsController = ({ controls }) => {
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const inc = () => {
     setStep(step + 1);
     console.log("step: ", step)
     if (step > 3) setStep(0);
   }
-  // disable button if the user has not entered a valid headline,
-  // otherwise, turn the button green and show a message in green
-  // font in the area indicated below the input field.
-  const setHeadline = (e) => {
-    console.log('set headline');
+  const handleSubmit = () => {
+    router.push('/dashboard');
   }
-  const setSkills = () => {
-    console.log('set skills');
-  }
-  const setRate = () => {
-    console.log('set rate');
-  }
+
   switch (step) {
     case 0:
-      return <SetHeadline onChange={setHeadline} onClick={inc} />;
+      return <SetHeadline onChange={controls.setHeadline} onClick={inc} />;
     case 1:
-      return <SetSkills onChange={setSkills} onClick={inc} />;
+      return <SetSkills onChange={controls.setSkills} onClick={inc} />;
     case 2:
-      return <SetRate onChange={setRate} onClick={inc} />;
+      return <SetRate onChange={controls.setRate} onClick={inc} />;
     case 3:
-      return <h1>review your task post</h1>
+      return <><h1>review your task post</h1><button onClick={handleSubmit}>submit</button></>
     default:
       return null;
   }
 }
 
 export default function CreateTask() {
-  const test = (e) => {
-    e.preventDefault();
-    console.log(e)
-  }
-
-
   return (
     <Box>
-      <StepsController />
+      <StepsController controls={Controllers} />
     </Box>
   )
 }
